@@ -15,7 +15,7 @@ st.title("YouTube Viral Topics Tool")
 days = st.number_input("Enter Days to Search (1-30):", min_value=1, max_value=30, value=5)
 
 # List of broader keywords
-keywords = ["HFY", "Humanity F Yeah", "HFY Humanity F*** Yeah"]
+keywords = ["HFY", "Humanity F Yeah", "HFY Humanity F*** Yeah", "hfy sci fi stories", "hfy stories", "hfy battle", "hfy scifi", "sci fi hfy", "hfy reddit stories", "hfy war stories", "sci fi hfy stories", "best hfy stories",]
 
 # Fetch Data Button
 if st.button("Fetch Data"):
