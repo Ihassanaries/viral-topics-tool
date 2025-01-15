@@ -18,7 +18,9 @@ days = st.number_input("Enter Days to Search (1-30):", min_value=1, max_value=30
 keywords = [
     "HFY", "Humanity F Yeah", "HFY Humanity F*** Yeah", "hfy sci fi stories", "hfy stories",
     "hfy battle", "hfy scifi", "sci fi hfy", "hfy reddit stories", "hfy war stories",
-    "sci fi hfy stories", "best hfy stories",
+    "sci fi hfy stories", "best hfy stories", "hfy revelation", "scifi hfy stories",
+    "hfy battel", "hfy galactic stories", "hfy human", "hfy deathworlder", "hfy human pet",
+    "best hfy story", "hfy war", "hfy human pets"
 ]
 
 # Fetch Data Button
