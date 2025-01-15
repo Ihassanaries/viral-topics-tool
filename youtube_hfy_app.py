@@ -15,7 +15,11 @@ st.title("YouTube Viral Topics Tool")
 days = st.number_input("Enter Days to Search (1-30):", min_value=1, max_value=30, value=5)
 
 # List of broader keywords
-keywords = ["HFY", "Humanity F Yeah", "HFY Humanity F*** Yeah", "hfy sci fi stories", "hfy stories", "hfy battle", "hfy scifi", "sci fi hfy", "hfy reddit stories", "hfy war stories", "sci fi hfy stories", "best hfy stories",]
+keywords = [
+    "HFY", "Humanity F Yeah", "HFY Humanity F*** Yeah", "hfy sci fi stories", "hfy stories",
+    "hfy battle", "hfy scifi", "sci fi hfy", "hfy reddit stories", "hfy war stories",
+    "sci fi hfy stories", "best hfy stories",
+]
 
 # Fetch Data Button
 if st.button("Fetch Data"):
@@ -72,17 +76,25 @@ if st.button("Fetch Data"):
                         all_results.append({
                             "Title": title,
                             "Description": description,
-                            "URL": video_url,
+                            "URL": video_url,  # Store the raw URL
                             "Views": views,
                             "Subscribers": subs
                         })
             else:
                 st.error(f"Failed to fetch statistics for keyword: {keyword}")
 
-        # Display all results in a table
+        # Display all results in a clickable format
         if all_results:
             st.success(f"Found {len(all_results)} results across all keywords!")
-            st.table(all_results)
+            for result in all_results:
+                st.markdown(
+                    f"**Title:** {result['Title']}  \n"
+                    f"**Description:** {result['Description']}  \n"
+                    f"**URL:** [Watch Video]({result['URL']})  \n"
+                    f"**Views:** {result['Views']}  \n"
+                    f"**Subscribers:** {result['Subscribers']}"
+                )
+                st.write("---")
         else:
             st.warning("No results found for channels with fewer than 3,000 subscribers.")
 
