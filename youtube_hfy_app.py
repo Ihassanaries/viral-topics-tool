@@ -32,7 +32,7 @@ if st.button("Fetch Data"):
 
         # Iterate over the list of keywords
         for keyword in keywords:
-            st.write(f"Searching for keyword: {keyword}")
+            st.write(f"Searching for keyword")
             
             # Define search parameters
             search_params = {
