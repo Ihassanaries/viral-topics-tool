@@ -2,8 +2,8 @@ import streamlit as st
 import requests
 from datetime import datetime, timedelta
 
-# YouTube API Key (Replace with a valid one)
-API_KEY = "YOUR_API_KEY"
+# YouTube API Key
+API_KEY = "AIzaSyBrWecWtZjfdzTQCStr5Hw8iDUu_HrS13c"
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 YOUTUBE_VIDEO_URL = "https://www.googleapis.com/youtube/v3/videos"
 YOUTUBE_CHANNEL_URL = "https://www.googleapis.com/youtube/v3/channels"
@@ -16,8 +16,11 @@ days = st.number_input("Enter Days to Search (1-30):", min_value=1, max_value=30
 
 # List of broader keywords
 keywords = [
-    "HFY", "Humanity F Yeah", "hfy sci fi stories", "hfy stories",
-    "hfy battle", "hfy scifi", "sci fi hfy", "hfy reddit stories",
+    "HFY", "Humanity F Yeah", "HFY Humanity F*** Yeah", "hfy sci fi stories", "hfy stories",
+    "hfy battle", "hfy scifi", "sci fi hfy", "hfy reddit stories", "hfy war stories",
+    "sci fi hfy stories", "best hfy stories", "hfy revelation", "scifi hfy stories",
+    "hfy battel", "hfy galactic stories", "hfy human", "hfy deathworlder", "hfy human pet",
+    "best hfy story", "hfy war", "hfy human pets"
 ]
 
 # Fetch Data Button
@@ -27,6 +30,7 @@ if st.button("Fetch Data"):
         start_date = (datetime.utcnow() - timedelta(days=int(days))).isoformat("T") + "Z"
         all_results = []
 
+        # Iterate over the list of keywords
         for keyword in keywords:
             st.write(f"Searching for keyword: {keyword}")
 
@@ -45,15 +49,12 @@ if st.button("Fetch Data"):
             response = requests.get(YOUTUBE_SEARCH_URL, params=search_params)
             data = response.json()
 
-            if "items" not in data:
+            # Check if "items" key exists
+            if "items" not in data or not data["items"]:
                 st.warning(f"No videos found for keyword: {keyword}")
                 continue
 
             videos = data["items"]
-            if not videos:
-                st.warning(f"No results found for: {keyword}")
-                continue
-
             video_ids = [video["id"]["videoId"] for video in videos if "id" in video and "videoId" in video["id"]]
             channel_ids = [video["snippet"]["channelId"] for video in videos if "snippet" in video and "channelId" in video["snippet"]]
 
@@ -66,7 +67,7 @@ if st.button("Fetch Data"):
             stats_response = requests.get(YOUTUBE_VIDEO_URL, params=stats_params)
             stats_data = stats_response.json()
 
-            if "items" not in stats_data:
+            if "items" not in stats_data or not stats_data["items"]:
                 st.warning(f"Failed to fetch video statistics for keyword: {keyword}")
                 continue
 
@@ -75,7 +76,7 @@ if st.button("Fetch Data"):
             channel_response = requests.get(YOUTUBE_CHANNEL_URL, params=channel_params)
             channel_data = channel_response.json()
 
-            if "items" not in channel_data:
+            if "items" not in channel_data or not channel_data["items"]:
                 st.warning(f"Failed to fetch channel statistics for keyword: {keyword}")
                 continue
 
